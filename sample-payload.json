@@ -1,0 +1,33 @@
+{
+    "patientId": "UUID",
+    "medications": [
+        {
+            "name": "SSRI",
+            "schedule": {
+                "daysOfWeek": "A",
+                "times": [
+                    "10:00am"
+                ]
+            }
+        },
+        {
+            "name": "lisinopril",
+            "schedule": {
+                "daysOfWeek": "A",
+                "times": [
+                    "10:00am",
+                    "6pm"
+                ]
+            }
+        },
+        {
+            "name": "madeup",
+            "schedule": {
+                "daysOfWeek": "MTHUR",
+                "times": [
+                    "8:00am"
+                ]
+            }
+        }
+    ]
+}
