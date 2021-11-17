@@ -21,6 +21,35 @@ Resources:
             Path: /hello
             Method: get
 
+  PatientMedScheduleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: patient_med_schedule/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PatientTable
+      Events:
+        PatientMedSchedule:
+          Type: Api
+          Properties:
+            Path: /schedule
+            Method: post
+
+  PatientTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - AttributeName: patientId
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: patientId
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
 Outputs:
   HelloWorldApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
@@ -31,3 +60,9 @@ Outputs:
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
+  PatientMedScheduleFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt PatientMedScheduleFunction.Arn
+  PatientMedScheduleFunction:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt PatientMedScheduleFunctionRole.Arn
