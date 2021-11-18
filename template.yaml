@@ -63,6 +63,6 @@ Outputs:
   PatientMedScheduleFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt PatientMedScheduleFunction.Arn
-  PatientMedScheduleFunction:
-    Description: "Implicit IAM Role created for Hello World function"
+  PatientMedScheduleFunctionIamRole:
+    Description: "Implicit IAM Role created for patient function"
     Value: !GetAtt PatientMedScheduleFunctionRole.Arn
