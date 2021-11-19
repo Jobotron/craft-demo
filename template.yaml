@@ -40,6 +40,7 @@ Resources:
   PatientTable:
     Type: AWS::DynamoDB::Table
     Properties: 
+      TableName: PatientTable
       AttributeDefinitions: 
         - AttributeName: patientId
           AttributeType: S
