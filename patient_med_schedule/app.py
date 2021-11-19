@@ -2,18 +2,24 @@ import json
 import boto3
 import uuid
 
-# import requests
 _TableName = "PatientTable"
 AttrName = "patientId"
 
 client = boto3.client("dynamodb")
 
 def lambda_handler(event, context):
-    # add dynamodb integration
     newId = uuid.uuid4()
     data = json.loads(event["body"])
-    
-    resp = put_patient_schedule(str(newId), data["name"], data["schedule"])
+    print(event)
+    method = event["httpMethod"]
+    if(method == "PUT"):
+         patientId = event["pathParameters"]["Id"]
+         resp = put_patient_schedule(patientId, data["name"], data["schedule"])
+    elif (method == "POST"):
+         resp = put_patient_schedule(str(newId), data["name"], data["schedule"])
+    else:
+        return {"statusCode": 405,
+        "body":{}}
     return {
         "statusCode": 200,
         "body": resp,
